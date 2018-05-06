@@ -30,6 +30,7 @@ namespace DALModels
                                  new PairTime() { StartTime = new TimeSpan(15, 05, 0), EndTime = new TimeSpan(16, 25, 0)},
                                  new PairTime() { StartTime = new TimeSpan(16, 40, 0), EndTime = new TimeSpan(18, 00, 0)}
             });
+
         public static class ParserConstants
         {
             public const int startColumnIndex = 3;

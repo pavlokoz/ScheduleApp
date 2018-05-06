@@ -1,13 +1,6 @@
 ﻿using DAL;
 using DocumentParser;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScheduleApp
@@ -34,17 +27,20 @@ namespace ScheduleApp
 
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
-                //byte[] fileHash = FileHasher.HashMD5(FileDialog.FileName);
-                //if (!fileRepository.CheckFileHash(fileHash) &&
-                //    fileRepository.InsertFileHashInDB(FileDialog.FileName, fileHash))
-                //{
+                byte[] fileHash = FileHasher.HashMD5(FileDialog.FileName);
+
+                if (!fileRepository.CheckFileHash(fileHash) &&
+                    fileRepository.InsertFileHashInDB(FileDialog.FileName, fileHash))
+                {
+                    Cursor.Current = Cursors.WaitCursor;
                     parser = new Parser(FileDialog.FileName);
-                    this.pairRepository.InsertPairs(parser.ParseDocument());
-                //}
-                //else
-                //{
-                //    MessageBox.Show("File already exist in DB", "ScheduleApp");
-                //}
+                    pairRepository.InsertPairs(parser.ParseDocument());
+                    Cursor.Current = Cursors.Arrow;
+                }
+                else
+                {
+                    MessageBox.Show("File already exist in DB", "ScheduleApp");
+                }
             }
         }
     }
