@@ -87,9 +87,9 @@
       <Project>{cb779c62-b469-4bd2-ba96-833d85cb03f5}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DocumentParser\DocumentParser.csproj">
+    <ProjectReference Include="..\DocumentParser\DocumentWorker.csproj">
       <Project>{9ceb5c5d-a79f-46de-a2de-13ff8ff866a3}</Project>
-      <Name>DocumentParser</Name>
+      <Name>DocumentWorker</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScheduleModels\ScheduleModels.csproj">
       <Project>{232c4705-2b59-43ff-9cef-e02cc0fdcb68}</Project>

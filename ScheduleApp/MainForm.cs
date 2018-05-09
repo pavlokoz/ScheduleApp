@@ -10,7 +10,7 @@ namespace ScheduleApp
     public partial class MainForm : Form
     {
         #region private field
-        private Parser parser;
+        private DocumentParser.DocumentParser parser;
         private FileRepository fileRepository;
         private PairRepository pairRepository;
         private DevelopRepository developRepository;
@@ -58,7 +58,7 @@ namespace ScheduleApp
                 //    fileRepository.InsertFileHashInDB(FileDialog.FileName, fileHash))
                 //{
                     Cursor.Current = Cursors.WaitCursor;
-                    parser = new Parser(FileDialog.FileName);
+                parser = new DocumentParser.DocumentParser(FileDialog.FileName);
                     //parser.ParseDocument();
                     pairRepository.InsertPairs(parser.ParseDocument());
                     Cursor.Current = Cursors.Arrow;

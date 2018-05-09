@@ -8,7 +8,7 @@ using Word = Microsoft.Office.Interop.Word;
 
 namespace DocumentParser
 {
-    public class Parser
+    public class DocumentParser
     {
         #region Private Fields
         private Word.Application Application;
@@ -17,7 +17,7 @@ namespace DocumentParser
         #endregion
 
         #region Constructors
-        public Parser(string PathObj)
+        public DocumentParser(string PathObj)
         {
             Object templatePathObj = PathObj;
             Application = new Word.Application();
