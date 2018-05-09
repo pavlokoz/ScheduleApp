@@ -52,21 +52,21 @@ namespace ScheduleApp
 
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
-                //byte[] fileHash = FileHasher.HashMD5(FileDialog.FileName);
+                byte[] fileHash = FileHasher.HashMD5(FileDialog.FileName);
 
-                //if (!fileRepository.CheckFileHash(fileHash) &&
-                //    fileRepository.InsertFileHashInDB(FileDialog.FileName, fileHash))
-                //{
+                if (!fileRepository.CheckFileHash(fileHash) &&
+                    fileRepository.InsertFileHashInDB(FileDialog.FileName, fileHash))
+                {
                     Cursor.Current = Cursors.WaitCursor;
                     parser = new Parser(FileDialog.FileName);
-                    //parser.ParseDocument();
+                    parser.ParseDocument();
                     pairRepository.InsertPairs(parser.ParseDocument());
                     Cursor.Current = Cursors.Arrow;
-                //}
-                //else
-                //{
-                //    MessageBox.Show("File already exist in DB", "ScheduleApp");
-                //}
+                }
+                else
+                {
+                    MessageBox.Show("File already exist in DB", "ScheduleApp");
+                }
             }
         }
 

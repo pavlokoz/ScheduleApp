@@ -81,6 +81,7 @@
             this.ClearDB.TabIndex = 3;
             this.ClearDB.Text = "ClearDB";
             this.ClearDB.UseVisualStyleBackColor = true;
+            this.ClearDB.Visible = false;
             this.ClearDB.Click += new System.EventHandler(this.ClearDB_Click);
             // 
             // MainForm
