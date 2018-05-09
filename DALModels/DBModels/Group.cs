@@ -1,4 +1,4 @@
-﻿namespace DALModels
+﻿namespace DALModels.DBModels
 {
     public class Group
     {

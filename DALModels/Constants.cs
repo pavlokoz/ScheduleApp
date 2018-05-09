@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
+using DALModels.DBModels;
 
 namespace DALModels
 {

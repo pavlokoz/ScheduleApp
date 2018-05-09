@@ -1,14 +1,14 @@
-﻿using DALModels;
+﻿using DALModels.DBModels;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-
 namespace DAL
 {
     class AuditoriumRepository
     {
+        #region Public Methods
         public void InsertAuditoriumForPair(SqlTransaction transaction, SqlConnection connection, long pairId, IList<Auditorium> auditoria)
         {
             auditoria.ToList().ForEach(x =>
@@ -25,5 +25,6 @@ namespace DAL
                 command.ExecuteNonQuery();
             });
         }
+        #endregion
     }
 }

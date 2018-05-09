@@ -30,6 +30,10 @@
         {
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
             this.LoadButton = new System.Windows.Forms.Button();
+            this.TutorScheduleViewer = new System.Windows.Forms.DataGridView();
+            this.CreateSchedule = new System.Windows.Forms.Button();
+            this.ClearDB = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.TutorScheduleViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // FileDialog
@@ -38,7 +42,7 @@
             // 
             // LoadButton
             // 
-            this.LoadButton.Location = new System.Drawing.Point(625, 233);
+            this.LoadButton.Location = new System.Drawing.Point(836, 415);
             this.LoadButton.Name = "LoadButton";
             this.LoadButton.Size = new System.Drawing.Size(145, 23);
             this.LoadButton.TabIndex = 0;
@@ -46,14 +50,51 @@
             this.LoadButton.UseVisualStyleBackColor = true;
             this.LoadButton.Click += new System.EventHandler(this.LoadButton_Click);
             // 
+            // TutorScheduleViewer
+            // 
+            this.TutorScheduleViewer.AllowUserToAddRows = false;
+            this.TutorScheduleViewer.AllowUserToDeleteRows = false;
+            this.TutorScheduleViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.TutorScheduleViewer.Location = new System.Drawing.Point(12, 13);
+            this.TutorScheduleViewer.Name = "TutorScheduleViewer";
+            this.TutorScheduleViewer.ReadOnly = true;
+            this.TutorScheduleViewer.Size = new System.Drawing.Size(969, 396);
+            this.TutorScheduleViewer.TabIndex = 1;
+            this.TutorScheduleViewer.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.TutorScheduleViewer_CellFormatting);
+            this.TutorScheduleViewer.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.TutorScheduleViewer_CellPainting);
+            // 
+            // CreateSchedule
+            // 
+            this.CreateSchedule.Location = new System.Drawing.Point(755, 415);
+            this.CreateSchedule.Name = "CreateSchedule";
+            this.CreateSchedule.Size = new System.Drawing.Size(75, 23);
+            this.CreateSchedule.TabIndex = 2;
+            this.CreateSchedule.Text = "Load Table";
+            this.CreateSchedule.UseVisualStyleBackColor = true;
+            this.CreateSchedule.Click += new System.EventHandler(this.CreateSchedule_Click);
+            // 
+            // ClearDB
+            // 
+            this.ClearDB.Location = new System.Drawing.Point(674, 415);
+            this.ClearDB.Name = "ClearDB";
+            this.ClearDB.Size = new System.Drawing.Size(75, 23);
+            this.ClearDB.TabIndex = 3;
+            this.ClearDB.Text = "ClearDB";
+            this.ClearDB.UseVisualStyleBackColor = true;
+            this.ClearDB.Click += new System.EventHandler(this.ClearDB_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(993, 450);
+            this.Controls.Add(this.ClearDB);
+            this.Controls.Add(this.CreateSchedule);
+            this.Controls.Add(this.TutorScheduleViewer);
             this.Controls.Add(this.LoadButton);
             this.Name = "MainForm";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.TutorScheduleViewer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -62,6 +103,9 @@
 
         private System.Windows.Forms.OpenFileDialog FileDialog;
         private System.Windows.Forms.Button LoadButton;
+        private System.Windows.Forms.DataGridView TutorScheduleViewer;
+        private System.Windows.Forms.Button CreateSchedule;
+        private System.Windows.Forms.Button ClearDB;
     }
 }
 

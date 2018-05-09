@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DALModels
+namespace DALModels.DBModels
 {
     public class Pair
     {

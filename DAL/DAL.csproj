@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditoriumRepository.cs" />
+    <Compile Include="DevelopRepository.cs" />
     <Compile Include="FileRepository.cs" />
     <Compile Include="GroupRepository.cs" />
     <Compile Include="PairRepository.cs" />

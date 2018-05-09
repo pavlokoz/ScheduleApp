@@ -40,13 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auditorium.cs" />
+    <Compile Include="DBModels\Auditorium.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Group.cs" />
-    <Compile Include="Pair.cs" />
+    <Compile Include="DBModels\Group.cs" />
+    <Compile Include="DBModels\Pair.cs" />
+    <Compile Include="DTOModels\DTOAuditorium.cs" />
+    <Compile Include="DTOModels\DTOGroup.cs" />
+    <Compile Include="DTOModels\DTOPair.cs" />
+    <Compile Include="DTOModels\DTOTime.cs" />
+    <Compile Include="DTOModels\DTOTutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PairTime.cs" />
-    <Compile Include="Tutor.cs" />
+    <Compile Include="DBModels\PairTime.cs" />
+    <Compile Include="DBModels\Tutor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

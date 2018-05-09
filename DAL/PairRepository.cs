@@ -1,4 +1,4 @@
-﻿using DALModels;
+﻿using DALModels.DBModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,18 +10,22 @@ namespace DAL
 {
     public class PairRepository
     {
+        #region Private Fields
         private AuditoriumRepository auditorium;
         private GroupRepository group;
         private TutorRepository tutor;
+        #endregion
 
-
+        #region Constructors
         public PairRepository()
         {
             auditorium = new AuditoriumRepository();
             group = new GroupRepository();
             tutor = new TutorRepository();
         }
+        #endregion
 
+        #region Public Methods
         public bool InsertPairs(IList<Pair> pairs)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.
@@ -50,7 +54,9 @@ namespace DAL
                 }
             }
         }
+        #endregion
 
+        #region Private Methods
         private long InsertPair(SqlTransaction transaction, SqlConnection connection, Pair pair)
         {
             SqlCommand command = new SqlCommand("InsertPair", connection, transaction)
@@ -67,5 +73,6 @@ namespace DAL
 
             return Convert.ToInt64(command.ExecuteScalar());
         }
+        #endregion
     }
 }

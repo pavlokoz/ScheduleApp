@@ -1,4 +1,4 @@
-﻿using DALModels;
+﻿using DALModels.DBModels;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,6 +8,7 @@ namespace DAL
 {
     class GroupRepository
     {
+        #region Public Methods
         public void InsertGroupForPair(SqlTransaction transaction, SqlConnection connection, long pairId, IList<Group> groups)
         {
             groups.ToList().ForEach(x =>
@@ -24,5 +25,6 @@ namespace DAL
                 command.ExecuteNonQuery();
             });
         }
+        #endregion
     }
 }

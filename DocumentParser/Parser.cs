@@ -1,18 +1,22 @@
-﻿using DALModels;
+﻿using DALModels.DBModels;
+using DALModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace DocumentParser
 {
     public class Parser
     {
+        #region Private Fields
         private Word.Application Application;
         private Word.Document Document;
+        private Word.Table Table;
+        #endregion
 
-        public Word.Table Table { get; set; }
-
+        #region Constructors
         public Parser(string PathObj)
         {
             Object templatePathObj = PathObj;
@@ -30,7 +34,9 @@ namespace DocumentParser
                 Table = null;
             }
         }
+        #endregion
 
+        #region Public Methods
         public IList<Pair> ParseDocument()
         {
             IList<Pair> pairs = new List<Pair>();
@@ -48,7 +54,7 @@ namespace DocumentParser
                             pairs.Add(GetInfoAboutPair(Table.Cell(j, i).Range.Text, j, i));
                         }
                     }
-                    catch
+                    catch (COMException)
                     {
 
                     }
@@ -57,7 +63,9 @@ namespace DocumentParser
 
             return pairs;
         }
+        #endregion
 
+        #region Private Methods
         private Pair GetInfoAboutPair(string MyInfo, int rowIndex, int columnIndex)
         {
             string[] Info = MyInfo.Split(Environment.NewLine.ToCharArray());
@@ -126,10 +134,10 @@ namespace DocumentParser
                         Table.Cell(rowIndex, i);
                         break;
                     }
-                    catch
+                    catch (COMException)
                     {
                         GroupNames.Add(
-                            new Group() { GroupName = Table.Cell(Constants.ParserConstants.GroupNameRowIndex, i).Range.Text.Substring(1, Constants.ParserConstants.GroupNameLength) }
+                            new Group() { GroupName = Table.Cell(Constants.ParserConstants.GroupNameRowIndex, i).Range.Text.Substring(0, Constants.ParserConstants.GroupNameLength) }
                             );
                     }
                 }
@@ -157,13 +165,9 @@ namespace DocumentParser
                 tutors = tutors.Substring(tutors.IndexOf(' ') + 1);
                 TutorName += tutors.Substring(0, Constants.ParserConstants.TutorInitialsLength);
                 Tutors.Add(new Tutor() { TutorName = TutorName });
-                try
+                if (tutors.Length > Constants.ParserConstants.MinTutorNameLength)
                 {
                     tutors = tutors.Substring(Constants.ParserConstants.TutorNameSkipLength);
-                }
-                catch
-                {
-                    break;
                 }
             }
 
@@ -177,7 +181,7 @@ namespace DocumentParser
             {
                 Table.Cell(rowIndex, Constants.ParserConstants.TimeColumnIndex);
             }
-            catch
+            catch (COMException)
             {
                 weekend = Constants.Weekends[2];
             }
@@ -187,7 +191,7 @@ namespace DocumentParser
                 Table.Cell(rowIndex + 1, columnIndex);
                 Table.Cell(rowIndex + 1, Constants.ParserConstants.TimeColumnIndex);
             }
-            catch
+            catch (COMException)
             {
                 weekend = Constants.Weekends[1];
             }
@@ -199,7 +203,7 @@ namespace DocumentParser
                     Table.Cell(rowIndex + 1, columnIndex);
 
                 }
-                catch
+                catch (COMException)
                 {
                     weekend = Constants.Weekends[0];
                 }
@@ -214,13 +218,13 @@ namespace DocumentParser
             {
                 return this.GetTime(rowIndex);
             }
-            catch (Exception)
+            catch (COMException)
             {
                 try
                 {
                     return this.GetTime(rowIndex - 1);
                 }
-                catch (Exception ex)
+                catch (COMException ex)
                 {
                     throw ex;
                 }
@@ -253,7 +257,7 @@ namespace DocumentParser
                     return Table.Cell(k, Constants.ParserConstants.DayColumnIndex).Range.Text.
                         Substring(0, Table.Cell(k, Constants.ParserConstants.DayColumnIndex).Range.Text.Length - Constants.ParserConstants.CountOfSkipElementForDay);
                 }
-                catch
+                catch (COMException)
                 {
                     k--;
                 }
@@ -261,5 +265,6 @@ namespace DocumentParser
 
             throw new ArgumentException("InvalidTypeOfDocument");
         }
+        #endregion
     }
 }

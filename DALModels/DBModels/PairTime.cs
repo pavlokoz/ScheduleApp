@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DALModels
+namespace DALModels.DBModels
 {
     public class PairTime
     {

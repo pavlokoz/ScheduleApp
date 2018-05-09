@@ -9,6 +9,7 @@ namespace DAL
 {
     public class FileRepository
     {
+        #region Public Methods
         public virtual bool CheckFileHash(byte[] openedFile)
         {
             foreach (var file in GetHashAllFiles())
@@ -21,6 +22,27 @@ namespace DAL
             return false;
         }
 
+        public virtual bool InsertFileHashInDB(string filePath, byte[] fileHash)
+        {
+            using (SqlConnection connection =
+                new SqlConnection(ConfigurationManager.
+                ConnectionStrings["ScheduleDBConnectionString"].ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("InsertHashOfFile", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("filePath", filePath);
+                command.Parameters.AddWithValue("fileHash", fileHash);
+
+                return Convert.ToBoolean(command.ExecuteNonQuery());
+            }
+        }
+        #endregion
+
+        #region Private Methods
         private IList<byte[]> GetHashAllFiles()
         {
             using (SqlConnection connection =
@@ -44,24 +66,6 @@ namespace DAL
                 }
             }
         }
-
-        public virtual bool InsertFileHashInDB(string filePath, byte[] fileHash)
-        {
-            using (SqlConnection connection =
-                new SqlConnection(ConfigurationManager.
-                ConnectionStrings["ScheduleDBConnectionString"].ConnectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand("InsertHashOfFile", connection)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-
-                command.Parameters.AddWithValue("filePath", filePath);
-                command.Parameters.AddWithValue("fileHash", fileHash);
-
-                return Convert.ToBoolean(command.ExecuteNonQuery());
-            }
-        }
+        #endregion
     }
 }
