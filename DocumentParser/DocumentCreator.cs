@@ -9,20 +9,26 @@ namespace DocumentWorker
 {
     public class DocumentCreator
     {
+        #region Private Fields 
         private Word._Application Application;
         private Word._Document Document;
         private Word.Table Table;
+        private Object objMissing;
+        #endregion
 
-        Object objMissing;
-
+        #region Properties
         public IList<PairContainer> PairsContainer { get; set; }
+        #endregion
 
+        #region Constructors
         public DocumentCreator()
         {
             objMissing = System.Reflection.Missing.Value;
             this.CreateDocument();
         }
+        #endregion
 
+        #region Public Methods
         public void CreateTable()
         {
             object endOfDocument = Constants.CreatorConstants.EndOfDoc;
@@ -47,7 +53,9 @@ namespace DocumentWorker
 
             this.InsertData();
         }
+        #endregion
 
+        #region Private Methods
         private void CreateDocument()
         {
             Application = new Word.Application
@@ -201,5 +209,6 @@ namespace DocumentWorker
                 splitInCurrentTime = true;
             }
         }
+        #endregion
     }
 }

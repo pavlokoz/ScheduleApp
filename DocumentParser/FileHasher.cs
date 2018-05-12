@@ -5,6 +5,7 @@ namespace DocumentWorker
 {
     public static class FileHasher
     {
+        #region Public Methods
         public static byte [] HashMD5(string filename)
         {
             using (var md5 = MD5.Create())
@@ -34,5 +35,6 @@ namespace DocumentWorker
 
             return bEqual;
         }
+        #endregion
     }
 }

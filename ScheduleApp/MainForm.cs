@@ -47,7 +47,7 @@ namespace ScheduleApp
         }
         #endregion
 
-        #region ButtonClickEvents
+        #region Button Click Events
         private void LoadButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog.Filter = "Microsoft Word 2007|*.docx|All files (*.*)|*.*";
