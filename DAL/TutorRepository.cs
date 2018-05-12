@@ -29,6 +29,31 @@ namespace DAL
             });
         }
 
+        public IList<string> GetTutors()
+        {
+            using (SqlConnection connection =
+                    new SqlConnection(ConfigurationManager.
+                    ConnectionStrings["ScheduleDBConnectionString"].ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("GetAllTutors", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    IList<string> tutors = new List<string>();
+                    while (reader.Read())
+                    {
+                        tutors.Add(reader["TutorName"].ToString());
+                    }
+                    return tutors;
+                }
+            }
+
+        }
+
         public DTOTutor GetPairsForTutor(string tutorName)
         {
             using (SqlConnection connection =
@@ -52,7 +77,8 @@ namespace DAL
                         {
                             Auditoriums = reader["Auditoriums"].ToString().
                                 Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries).
-                                Select(x => new DTOAuditorium { AuditoriumName =x }).ToList(),
+                                Select(x => new DTOAuditorium { AuditoriumName = x }).
+                                GroupBy(x => x.AuditoriumName).Select(x => x.First()).ToList(),
                             Groups = reader["Groups"].ToString().
                                 Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries).
                                 Select(x => new DTOGroup { GroupName = x }).ToList(),

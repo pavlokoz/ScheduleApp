@@ -15,5 +15,13 @@
         public string Time { get; set; }
 
         public string Type { get; set; }
+
+        public override string ToString()
+        {
+            return Subject + ", " +
+                Groups + ", " +
+                Auditoriums + ", " +
+                Type;
+        }
     }
 }

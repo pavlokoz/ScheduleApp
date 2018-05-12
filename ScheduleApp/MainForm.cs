@@ -1,7 +1,9 @@
 ﻿using DAL;
-using DocumentParser;
+using DocumentWorker;
 using ScheduleModels.Mappers;
+using ScheduleModels.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -10,12 +12,14 @@ namespace ScheduleApp
     public partial class MainForm : Form
     {
         #region private field
-        private Parser parser;
+        private DocumentParser parser;
+        private DocumentCreator creator;
         private FileRepository fileRepository;
         private PairRepository pairRepository;
         private DevelopRepository developRepository;
         private TutorRepository tutorRepository;
         private PairMapper pairMapper;
+        private IList<PairContainer> pairs;
         #endregion
 
         #region constructor
@@ -46,19 +50,19 @@ namespace ScheduleApp
         #region ButtonClickEvents
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            FileDialog.Filter = "Microsoft Word 2007|*.docx|All files (*.*)|*.*";
-            FileDialog.FilterIndex = 1;
-            FileDialog.RestoreDirectory = true;
+            OpenFileDialog.Filter = "Microsoft Word 2007|*.docx|All files (*.*)|*.*";
+            OpenFileDialog.FilterIndex = 1;
+            OpenFileDialog.RestoreDirectory = true;
 
-            if (FileDialog.ShowDialog() == DialogResult.OK)
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                byte[] fileHash = FileHasher.HashMD5(FileDialog.FileName);
+                byte[] fileHash = FileHasher.HashMD5(OpenFileDialog.FileName);
 
                 if (!fileRepository.CheckFileHash(fileHash) &&
-                    fileRepository.InsertFileHashInDB(FileDialog.FileName, fileHash))
+                    fileRepository.InsertFileHashInDB(OpenFileDialog.FileName, fileHash))
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    parser = new Parser(FileDialog.FileName);
+                    parser = new DocumentParser(OpenFileDialog.FileName);
                     parser.ParseDocument();
                     pairRepository.InsertPairs(parser.ParseDocument());
                     Cursor.Current = Cursors.Arrow;
@@ -70,11 +74,29 @@ namespace ScheduleApp
             }
         }
 
-        private void CreateSchedule_Click(object sender, EventArgs e)
+        private void CreateButton_Click(object sender, EventArgs e)
         {
-            var result = tutorRepository.GetPairsForTutor("Мельничин А. В.");
+            Cursor.Current = Cursors.WaitCursor;
 
-            TutorScheduleViewer.DataSource = result.Pairs.Select(pairMapper.Map).ToList();
+            var tutors = tutorRepository.GetTutors();
+
+            pairs = tutors.Select(x =>
+            new PairContainer
+            {
+                TutorName = x,
+                Pairs = tutorRepository.GetPairsForTutor(x).
+                        Pairs.Select(pairMapper.Map).ToList()
+            }).ToList();
+
+            creator = new DocumentCreator()
+            {
+
+                PairsContainer = pairs
+
+            };
+            creator.CreateTable();
+
+            Cursor.Current = Cursors.Arrow;
         }
 
         private void ClearDB_Click(object sender, EventArgs e)

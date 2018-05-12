@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALModels", "DALModels\DALM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleModels", "ScheduleModels\ScheduleModels.csproj", "{232C4705-2B59-43FF-9CEF-E02CC0FDCB68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentParser", "DocumentParser\DocumentParser.csproj", "{9CEB5C5D-A79F-46DE-A2DE-13FF8FF866A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentWorker", "DocumentParser\DocumentWorker.csproj", "{9CEB5C5D-A79F-46DE-A2DE-13FF8FF866A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9E9FADA1-B512-4E7F-8730-090426C772A1}"
 	ProjectSection(SolutionItems) = preProject
