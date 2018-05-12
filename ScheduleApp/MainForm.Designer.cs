@@ -32,7 +32,6 @@
             this.LoadButton = new System.Windows.Forms.Button();
             this.TutorScheduleViewer = new System.Windows.Forms.DataGridView();
             this.ClearDB = new System.Windows.Forms.Button();
-            this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.CreateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TutorScheduleViewer)).BeginInit();
             this.SuspendLayout();
@@ -106,7 +105,6 @@
         private System.Windows.Forms.Button LoadButton;
         private System.Windows.Forms.DataGridView TutorScheduleViewer;
         private System.Windows.Forms.Button ClearDB;
-        private System.Windows.Forms.SaveFileDialog SaveFileDialog;
         private System.Windows.Forms.Button CreateButton;
     }
 }

@@ -56,13 +56,13 @@ namespace ScheduleApp
 
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                byte[] fileHash = FileHasher.HashMD5(FileDialog.FileName);
+                byte[] fileHash = FileHasher.HashMD5(OpenFileDialog.FileName);
 
                 if (!fileRepository.CheckFileHash(fileHash) &&
-                    fileRepository.InsertFileHashInDB(FileDialog.FileName, fileHash))
+                    fileRepository.InsertFileHashInDB(OpenFileDialog.FileName, fileHash))
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    parser = new DocumentWorker.DocumentParser(OpenFileDialog.FileName);
+                    parser = new DocumentParser(OpenFileDialog.FileName);
                     parser.ParseDocument();
                     pairRepository.InsertPairs(parser.ParseDocument());
                     Cursor.Current = Cursors.Arrow;
