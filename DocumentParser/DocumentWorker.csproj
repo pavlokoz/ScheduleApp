@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentCreator.cs" />
     <Compile Include="FileHasher.cs" />
     <Compile Include="DocumentParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,6 +54,10 @@
     <ProjectReference Include="..\DALModels\DALModels.csproj">
       <Project>{a33b7d30-594a-4458-8cce-5a66a9347ad8}</Project>
       <Name>DALModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScheduleModels\ScheduleModels.csproj">
+      <Project>{232C4705-2B59-43FF-9CEF-E02CC0FDCB68}</Project>
+      <Name>ScheduleModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

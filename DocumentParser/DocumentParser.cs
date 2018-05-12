@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Word = Microsoft.Office.Interop.Word;
 
-namespace DocumentParser
+namespace DocumentWorker
 {
     public class DocumentParser
     {

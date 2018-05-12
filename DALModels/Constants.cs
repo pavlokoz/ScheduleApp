@@ -11,8 +11,8 @@ namespace DALModels
             new List<string> { "Понеділок",
                                "Вівторок",
                                "Середа",
-                               "Чертвер",
-                               "П'ятниця",
+                               "Четвер",
+                               "П`ятниця",
                                "Субота",
                                "Неділя"
                              });
@@ -54,6 +54,22 @@ namespace DALModels
             public const int EndTimeSubStringIndex = 5;
             public const int DayColumnIndex = 1;
             public const int CountOfSkipElementForDay = 2;
+        }
+
+        public static class CreatorConstants
+        {
+            public const string EndOfDoc = "\\endofdoc";
+            public const float PageSize = 1584f;
+            public const int CountRow = 31;
+            public const int FontSize = 12;
+            public const string DayHeaderText = "День";
+            public const string TimeHeaderText = "Година";
+            public const int IndexOfStartTutorColumn = 2;
+            public const int CountOfPairsInOneDay = 6;
+            public const int DayColumnIndex = 1;
+            public const int TimeColumnIndex = 2;
+            public const int TutorNameRowIndex = 1;
+            public const int SplitNums = 2;
         }
     }
 }

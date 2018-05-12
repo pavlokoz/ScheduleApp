@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Security.Cryptography;
 
-namespace DocumentParser
+namespace DocumentWorker
 {
     public static class FileHasher
     {
